@@ -1,0 +1,79 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Seminarski_fitness_centar_IB130116.Helper
+@{ User user = Context.GetLoggedUser(); }
+
+@{
+    ViewData["Title"] = "Lista dolazaka i odlazaka";
+}
+
+
+@model Seminarski_fitness_centar_IB130116.ViewModels.DolasciOdlasciSingleVM
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+    <br />
+    <hr />
+    <div class="jumbotron">
+        @if (Model.Rows.Count > 0)
+        {
+
+            <p>Odlasci i dolasci KORISNIKA: @Model.User.Username</p>
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Vrijeme dolaska</th>
+                        <th>Vrijeme odlaska</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var dolazak_odlazak in Model.Rows)
+                    {
+                    <tr>
+                        @if (dolazak_odlazak.VrijemeOdlaska.ToString() == "1/1/0001 12:00:00 AM")
+                        {
+                        <td>@dolazak_odlazak.VrijemeDolaska </td>
+                        <td> / </td>
+                        }
+                        else
+                        {
+                        <td>@dolazak_odlazak.VrijemeDolaska</td>
+                        <td>@dolazak_odlazak.VrijemeOdlaska </td>
+                        }
+                    </tr>
+                    }
+
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>Korisnik @Model.User.Username nema prijavljenih dolazaka/odlazaka. @Html.ActionLink("Pregledaj druge zaposlenike?", "Zaposlenici", "DolasciOdlasci", htmlAttributes: null) </p>
+        }
+
+                @*<ul>
+                    @if (Model.Rows.Count > 0) {
+                    <h2 style="margin-left:0px">Odlasci i dolasci KORISNIKA: @Model.Rows[0].User.Username</h2>
+                    <br />
+
+                        @foreach (var dolazak_odlazak in Model.Rows)
+                        {
+                            string dodatni_tekst;
+
+                            if (dolazak_odlazak.VrijemeOdlaska.ToString() == "1/1/0001 12:00:00 AM")
+                            {
+                                <li>Vrijeme dolaska: @dolazak_odlazak.VrijemeDolaska </li>
+                            }
+                            else
+                            {
+                                <li>Vrijeme dolaska: @dolazak_odlazak.VrijemeDolaska | Vrijeme odlaska: @dolazak_odlazak.VrijemeOdlaska </li>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <span>Nema prijavljenih dolazaka/odlazaka!</span>
+                    }
+                </ul>*@
+
+            </div>
+</div>

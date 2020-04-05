@@ -1,0 +1,68 @@
+﻿
+@using Seminarski_fitness_centar_IB130116.Helper
+
+@{
+    ViewData["Title"] = "Lista dolazaka i odlazaka";
+}
+
+@{ User user = Context.GetLoggedUser(); }
+@model Seminarski_fitness_centar_IB130116.ViewModels.DolasciOdlasciSingleVM
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+    <br/>
+    @Html.ActionLink("PRIJAVI NOVI DOLAZAK SADA", "SnimiDolazak", "DolasciOdlasci", htmlAttributes: new Dictionary<string, object> { { "class", "btn btn-danger" } })
+    <hr/>
+    <div class="jumbotron">
+        <p>Odlasci i dolasci KORISNIKA: @Model.User.Username</p>
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Vrijeme dolaska</th>
+                    <th>Vrijeme odlaska</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var dolazak_odlazak in Model.Rows)
+                {
+                    <tr>
+                        @if (dolazak_odlazak.VrijemeOdlaska.ToString() == "1/1/0001 12:00:00 AM")
+                        {
+
+                        <td>@dolazak_odlazak.VrijemeDolaska </td>
+                        <td>@Html.ActionLink("PRIJAVI ODLAZAK!", "SnimiOdlazak", "DolasciOdlasci", routeValues: new { DolazakOdlazakId = dolazak_odlazak.DolazakOdlazakId }, htmlAttributes: null) </td>
+                        }
+                        else
+                        {
+                        <td>@dolazak_odlazak.VrijemeDolaska</td>
+                        <td>@dolazak_odlazak.VrijemeOdlaska </td>
+                        }
+                    </tr>
+                }
+
+            </tbody>
+            </table>
+            @*<ul>
+                @if (Model.Rows.Count > 0)
+                {
+                    @foreach (var dolazak_odlazak in Model.Rows)
+                     {
+
+                         if (dolazak_odlazak.VrijemeOdlaska.ToString() == "1/1/0001 12:00:00 AM")
+                         {
+                             <li>Vrijeme dolaska: @dolazak_odlazak.VrijemeDolaska | @Html.ActionLink("PRIJAVI ODLAZAK!", "SnimiOdlazak", "DolasciOdlasci", routeValues: new {DolazakOdlazakId = dolazak_odlazak.DolazakOdlazakId}, htmlAttributes: null) </li>
+                         }
+                         else
+                         {
+                             <li>Vrijeme dolaska: @dolazak_odlazak.VrijemeDolaska | Vrijeme odlaska: @dolazak_odlazak.VrijemeOdlaska </li>
+                         }
+                     }
+                }
+                else
+                {
+                    <span>Nema prijavljenih dolazaka/odlazaka!</span>
+                }
+            </ul>*@
+
+        </div>
+</div>

@@ -1,0 +1,139 @@
+﻿@using System.Net
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Rewrite.Internal.ApacheModRewrite
+@using Seminarski_fitness_centar_IB130116.Models
+@using Seminarski_fitness_centar_IB130116.Helper
+
+<!DOCTYPE html>
+<html>
+
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - IB130116.Web</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,600,700,700i|Montserrat:300,400,500,600,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/lib/animate/animate.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="~/lib/ionicons/css/ionicons.css" />
+    <link rel="stylesheet" href="~/lib/lightbox/css/lightbox.css" />
+    <link rel="stylesheet" href="~/lib/ionicons/css/ionicons.css" />
+    <link rel="stylesheet" href="~/lib/owlcarousel/assets/owl.carousel.css" />
+    <link rel="stylesheet" href="~/lib/owlcarousel/assets/owl.theme.default.css" />
+
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="/js/site.js"></script>
+
+    <script src="/js/FitnessCentar.js"></script>
+    <script src="/lib/counterup/counterup.min.js"></script>
+    <script src="/lib/easing/easing.js"></script>
+    <script src="/lib/isotope/isotope.pkgd.js"></script>
+    <script src="~/lib/lightbox/js/lightbox.js"></script>
+    <script src="~/lib/mobile-nav/mobile-nav.js"></script>
+    <script src="~/lib/owlcarousel/owl.carousel.js"></script>
+    <script src="~/lib/waypoints/waypoints.min.js"></script>
+    <script src="~/lib/wow/wow.js"></script>
+
+
+</head>
+
+
+<body>
+    @{ User user = Context.GetLoggedUser(); }
+
+    <header id="header" style="background:#f5f8fd">
+
+        <div id="topbar">
+            <div class="container">
+                <div class="social-links">
+                    <a href="https://www.fit.ba" class="FIT">FIT</a>
+                    <a href="https://fit.ba/student" class="dlwms">DLWMS</a>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <div class="logo float-left">
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <h1 class="text-light"><a href="~/Index/Index" class="scrollto"><span>Fitness-centar IB130116</span></a></h1>
+                <!-- <a href="#header" class="scrollto"><img src="img/logo.png" alt="" class="img-fluid"></a> -->
+            </div>
+
+            <nav class="main-nav float-right d-none d-lg-block">
+                <ul>
+                    <li><a asp-area="" asp-controller="Login" asp-action="Index">Login</a></li>
+                    <li><a asp-area="" asp-controller="Register" asp-action="Index">Registracija</a></li>
+                </ul>
+            </nav><!-- .main-nav -->
+
+        </div>
+    </header>
+    @*@{
+            ViewData["ErrorMessage"] = "test";
+        }*@
+    @if (ViewData["ErrorMessage"] != null || TempData["ErrorMessage"] != null)
+    {
+        <div id="ErrorMessage" class="alert alert-danger">
+            @ViewData["ErrorMessage"]
+            @TempData["ErrorMessage"]
+        </div>
+    }
+    @*<nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a asp-area="" asp-controller="Index" asp-action="Index" class="navbar-brand">Seminarski_fitness_centar_IB130116</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        @if (user != null)
+                        {
+                            <li><a> Dobrodošao,  @user.Username </a></li>
+                            <li><a asp-area="" asp-controller="Login" asp-action="Logout">Logout</a></li>
+                        }
+                        else
+                        {
+                            <li><a asp-area="" asp-controller="Login" asp-action="Index">Login</a></li>
+                            <li><a asp-area="" asp-controller="Register" asp-action="Index">Registracija</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>*@
+
+    <partial name="_CookieConsentPartial" />
+    <div id="header-push" style="height:60px"></div>
+    <section id="main" style="padding:50px">
+        @RenderBody()
+
+    </section>
+    <footer class="text-center">
+
+            <p style="color:#6d6d6d;" >&copy; 2020 - Seminarski_fitness_centar_IB130116</p>
+        
+    </footer>
+
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+
+</html>

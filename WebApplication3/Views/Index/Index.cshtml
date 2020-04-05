@@ -1,0 +1,231 @@
+﻿@using Seminarski_fitness_centar_IB130116.Helper
+@using Seminarski_fitness_centar_IB130116.Models
+
+
+@{
+    ViewData["Title"] = "Dobrodošli u fitness centar";
+}
+
+@{ User user = Context.GetLoggedUser(); }
+
+<div class="container text-center">
+    <h1>@ViewData["Title"]</h1>
+    <br /><br />
+
+
+    @if (user.EmailConfirm == 0)
+    {
+        <span class="alert-form-error">Vaš email @user.Email nije verifikovan. Da bi koristili TwoFactor prvo morate verifikovati mail!</span> <br />
+        <b><a asp-action="PosaljiKonfirmacijskiMail" asp-controller="Register" class="btn btn-outline-danger" id="verifikujMail">Verifikuj</a></b>
+        <br /><br /><br /><br />
+    }
+
+    @if (user.Role >= 1)
+    {
+        <h2>Admin Opcije:</h2>
+    }
+    else
+    {
+        <h2>Zaposlenik Opcije:</h2>
+    }
+    <div class="row" id="call-to-action">
+        @if (user.Role >= 1)
+        {
+            <div class="col-md-4 cta-btn-container">
+                @Html.ActionLink("Lista aktuelnih obavještenja", "Index", "Obavjestenja", null, htmlAttributes: new { @class = "cta-btn", @style = "width:100%" })
+            </div>
+            <div class="col-md-4 cta-btn-container">
+                @Html.ActionLink("Pregledaj dolaske i odlaske zaposlenih", "Zaposlenici", "DolasciOdlasci", null, htmlAttributes: new { @class = "cta-btn", @style = "width:100%" })
+            </div>
+            <div class="col-md-4 cta-btn-container">
+                @Html.ActionLink("Dodaj obavještenje", "Dodaj", "Obavjestenja", null, htmlAttributes: new { @class = "cta-btn", @style = "width:100%" })
+            </div>
+        }
+        else
+        {
+            <div class="col-md-4 cta-btn-container">
+                @Html.ActionLink("Lista aktuelnih obavještenja", "Index", "Obavjestenja", null, htmlAttributes: new { @class = "cta-btn", @style = "width:100%" })
+            </div>
+            <div class="col-md-4 cta-btn-container">
+                @Html.ActionLink("Prijavi i pregledaj odlaske i dolaske", "ZaposlenikDolasciDetalji", "DolasciOdlasci", null, htmlAttributes: new { @class = "cta-btn", @style = "width:100%" })
+            </div>
+            <div class="col-md-4 cta-btn-container">
+                <a href="#" class="cta-btn" style="width:100%">Pregledaj programe</a>
+            </div>
+        }
+    </div>
+
+    <section id="services" class="section-bg">
+        <div class="container">
+
+            <header class="section-header">
+                <h3>Naše usluge</h3>
+                <p>Ispod se nalazi detaljan opis naših vrhunskih usluga i servisa koji su tu samo za Vas na raspolaganju.</p>
+            </header>
+
+            <div class="row">
+
+                <div class="col-md-6 col-lg-4 wow bounceInUp" data-wow-duration="1.4s" style="visibility: visible; animation-duration: 1.4s; animation-name: bounceInUp;">
+                    <div class="box">
+                        <div class="icon" style="background: #fceef3;"><i class="ion-ios-analytics-outline" style="color: #ff689b;"></i></div>
+                        <h4 class="title"><a href="">Vrhunske sprave</a></h4>
+                        <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 wow bounceInUp" data-wow-duration="1.4s" style="visibility: visible; animation-duration: 1.4s; animation-name: bounceInUp;">
+                    <div class="box">
+                        <div class="icon" style="background: #fff0da;"><i class="ion-ios-bookmarks-outline" style="color: #e98e06;"></i></div>
+                        <h4 class="title"><a href="">Certifikati</a></h4>
+                        <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s" style="visibility: visible; animation-duration: 1.4s; animation-delay: 0.1s; animation-name: bounceInUp;">
+                    <div class="box">
+                        <div class="icon" style="background: #e6fdfc;"><i class="ion-ios-paper-outline" style="color: #3fcdc7;"></i></div>
+                        <h4 class="title"><a href="">Vrhunski treneri</a></h4>
+                        <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s" style="visibility: visible; animation-duration: 1.4s; animation-delay: 0.1s; animation-name: bounceInUp;">
+                    <div class="box">
+                        <div class="icon" style="background: #eafde7;"><i class="ion-ios-speedometer-outline" style="color:#41cf2e;"></i></div>
+                        <h4 class="title"><a href="">Ugodan ambijent</a></h4>
+                        <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 wow bounceInUp" data-wow-delay="0.2s" data-wow-duration="1.4s" style="visibility: visible; animation-duration: 1.4s; animation-delay: 0.2s; animation-name: bounceInUp;">
+                    <div class="box">
+                        <div class="icon" style="background: #e1eeff;"><i class="ion-ios-world-outline" style="color: #2282ff;"></i></div>
+                        <h4 class="title"><a href="">Grupni treninzi</a></h4>
+                        <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 wow bounceInUp" data-wow-delay="0.2s" data-wow-duration="1.4s" style="visibility: visible; animation-duration: 1.4s; animation-delay: 0.2s; animation-name: bounceInUp;">
+                    <div class="box">
+                        <div class="icon" style="background: #ecebff;"><i class="ion-ios-clock-outline" style="color: #8660fe;"></i></div>
+                        <h4 class="title"><a href="">Pomoć zaposlenih</a></h4>
+                        <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <div id="why-us" style="padding-top:0px">
+        <div class="row counters">
+
+            <div class="col-lg-3 col-6 text-center">
+                <span data-toggle="counter-up">352</span>
+                <p>Klijenata</p>
+            </div>
+
+            <div class="col-lg-3 col-6 text-center">
+                <span data-toggle="counter-up">11</span>
+                <p>Trenera</p>
+            </div>
+
+            <div class="col-lg-3 col-6 text-center">
+                <span data-toggle="counter-up">152</span>
+                <p>Aktivnih pretplata</p>
+            </div>
+
+            <div class="col-lg-3 col-6 text-center">
+                <span data-toggle="counter-up">9</span>
+                <p>Zaposlenika</p>
+            </div>
+        </div>
+    </div>
+    <section id="pricing" class="wow fadeInUp section-bg" style="visibility: visible; animation-name: fadeInUp; padding:80px 25px">
+
+        <div class="container">
+
+            <header class="section-header">
+                <h3>Cjenovnik</h3>
+                <p>Ovdje možete pregledati različite vrste mjesečnih pretplata i članarina.</p>
+            </header>
+
+            <div class="row flex-items-xs-middle flex-items-xs-center">
+
+                <!-- Basic Plan  -->
+                <div class="col-xs-12 col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><span class="currency">KM</span>30<span class="period">/mjesec</span></h3>
+                        </div>
+                        <div class="card-block">
+                            <h4 class="card-title">
+                                Osnovna pretplata
+                            </h4>
+                            <ul class="list-group">
+                                <li class="list-group-item">Pristup svim spravama</li>
+                                <li class="list-group-item">3 sedmična treninga</li>
+                                <li class="list-group-item">Pomoć zaposlenika</li>
+                            </ul>
+                            <a href="#" class="btn">Odaberi</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Regular Plan  -->
+                <div class="col-xs-12 col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><span class="currency">KM</span>40<span class="period">/mjesec</span></h3>
+                        </div>
+                        <div class="card-block">
+                            <h4 class="card-title">
+                                Plus pretplata
+                            </h4>
+                            <ul class="list-group">
+                                <li class="list-group-item">Pristup svim spravama</li>
+                                <li class="list-group-item">5 sedmičnih treninga</li>
+                                <li class="list-group-item">Pomoć certifikovanih trenera</li>
+                                <li class="list-group-item">Pretplata na 1 grupni trening</li>
+                            </ul>
+                            <a href="#" class="btn">Odaberi</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Premium Plan  -->
+                <div class="col-xs-12 col-lg-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><span class="currency">KM</span>60<span class="period">/mjesec</span></h3>
+                        </div>
+                        <div class="card-block">
+                            <h4 class="card-title">
+                                Premium Pretplata
+                            </h4>
+                            <ul class="list-group">
+                                <li class="list-group-item">Pristup svim spravama</li>
+                                <li class="list-group-item">Neograničen broj sedmičnih treninga</li>
+                                <li class="list-group-item">Pomoć certifikovanih trenera</li>
+                                <li class="list-group-item">Pretplata na 2 grupna treninga</li>
+                            </ul>
+                            <a href="#" class="btn">Odaberi</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+    <br />
+    <br />
+    @*<div class="row">
+            <h2><b>Samo za testiranje: </b></h2>
+            <ul>
+                <li>@Html.ActionLink("Uloguj se kao master Admin", "LogAsAdmin", "Index")</li>
+                <li>@Html.ActionLink("Uloguj se kao zaposlenik", "LogAsZaposlenik", "Index")</li>
+            </ul>
+            <span>Odmah prebacuje izmedju razlicitih tipova korisnika bez logovanja</span>
+        </div>*@
+
+
+
+</div>

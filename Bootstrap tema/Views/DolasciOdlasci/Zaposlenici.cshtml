@@ -1,0 +1,42 @@
+﻿@using Seminarski_fitness_centar_IB130116.Helper
+
+@{
+    ViewData["Title"] = "Lista zaposlenika";
+}
+
+@{ User user = Context.GetLoggedUser(); }
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+    <div class="jumbotron">
+        <p>U tabeli ispod možete pregledati zaposlenike: </p>
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Zaposlenik</th>
+                    <th>Email</th>
+                    <th>----</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var zaposlenik in Model)
+                {
+                    <tr>
+                         <td>@zaposlenik.Username</td> 
+                         <td>@zaposlenik.Email</td>
+                        <td>  </td>
+                        <td>@Html.ActionLink("Pregledaj dolaske i odlaske", "AdminDolasciDetalji", "DolasciOdlasci", routeValues: new { ZaposlenikId = zaposlenik.UserId }, htmlAttributes: null)</td>
+                    </tr>
+                }
+                </ul>
+            </tbody>
+        </table>
+        @*@foreach (var zaposlenik in Model)
+        {
+            <li>Zaposlenik: @zaposlenik.Username | @Html.ActionLink("Pregledaj dolaske", "AdminDolasciDetalji", "DolasciOdlasci", routeValues: new { ZaposlenikId = zaposlenik.UserId }, htmlAttributes: null)</li>
+        }
+        </ul>*@
+
+    </div>
+</div>

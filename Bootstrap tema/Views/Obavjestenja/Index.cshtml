@@ -1,0 +1,54 @@
+﻿@using Seminarski_fitness_centar_IB130116.Helper
+@using Seminarski_fitness_centar_IB130116.Models
+@{
+    User user = Context.GetLoggedUser();
+    ViewData["Title"] = "Obavjestenja";
+}
+
+@model Seminarski_fitness_centar_IB130116.ViewModels.ObavjestenjaVM;
+
+
+<div class="container">
+
+    <h1>Posljednja obavještenja: </h1>
+    <br />
+    @if (Model.Rows.Count > 0)
+    {
+        <br />
+        @foreach (var o in Model.Rows)
+        {
+            <br />
+            <div class="obavjestenje-div">
+                <div class="obavjestenje-naslov"><b>@o.Naslov</b></div>
+
+                <div>@o.Tekst</div>
+                <div style="margin-top:5px; font-size:11px">@o.Vrijeme / Autor:@o.User.Username </div>
+                @if (user.Role > 0)
+                {
+                    @Html.ActionLink("Uredi", "Uredi", "Obavjestenja", routeValues: new { obavjestenjeId = o.ObavjestenjeId }, htmlAttributes: null);  
+                    @Html.ActionLink(" Obrisi", "Obrisi", "Obavjestenja", routeValues: new { obavjestenjeId = o.ObavjestenjeId }, htmlAttributes: new { @class = "span-text-red brisi-obavjestenje", });
+                }
+            </div>
+            <hr />
+        }
+    }
+    else
+    {
+        <span>Jos uvijek nema obavjestenja</span>
+        <li><a asp-controller="Obavjestenja" asp-action="Dodaj">Dodaj obavjestenje</a></li>
+    }
+    <form asp-action="Index" asp-controller="Obavjestenja" method="get">
+        <input type="hidden" name="from" value="@ViewData["from"]" />
+        <input type="hidden" name="per_page" value="@ViewData["per_page"]" />
+
+        @if ((bool)ViewData["load_more"] == true)
+        {
+            <input type="submit" class="btn btn-green" value="Ucitaj jos obavjestenja" name="load_obavjestenja" />
+        } else
+        {
+            <p>Nema vise obavjestenja za prikaz</p>
+        }
+
+
+    </form>
+</div>

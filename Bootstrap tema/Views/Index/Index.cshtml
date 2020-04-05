@@ -1,0 +1,41 @@
+﻿@using Seminarski_fitness_centar_IB130116.Helper
+@using Seminarski_fitness_centar_IB130116.Models
+
+
+@{
+    ViewData["Title"] = "Dobrodošli u fitness centar";
+}
+
+@{ User user = Context.GetLoggedUser(); }
+
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+    <div class="jumbotron">
+        <div class="row">
+            <h2>Opcije:</h2>
+            <b><li>@Html.ActionLink("Obavjestenja", "Index", "Obavjestenja")</li></b>
+            @if (user.Role >= 1)
+            {
+                <b><li>@Html.ActionLink("Pregledaj dolaske i odlaske zaposlenih", "Zaposlenici", "DolasciOdlasci")</li></b>
+                <b><li>@Html.ActionLink("Dodaj obavjestenje", "Dodaj", "Obavjestenja")</li></b>
+            }
+            else
+            {
+                <b><li>@Html.ActionLink("Prijavi i pregledaj odlaske i dolaske", "ZaposlenikDolasciDetalji", "DolasciOdlasci")</li></b>
+            }
+        </div>
+        <br />
+        <br />
+        <div class="row">
+            <h2><b>Samo za testiranje: </b></h2>
+            <ul>
+                <li>@Html.ActionLink("Uloguj se kao master Admin", "LogAsAdmin", "Index")</li>
+                <li>@Html.ActionLink("Uloguj se kao zaposlenik", "LogAsZaposlenik", "Index")</li>
+            </ul>
+            <span>Odmah prebacuje izmedju razlicitih tipova korisnika bez logovanja</span>
+        </div>
+
+
+    </div>
+</div>

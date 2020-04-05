@@ -1,0 +1,51 @@
+﻿
+
+<!-- Registration form -->
+@model Seminarski_fitness_centar_IB130116.ViewModels.RegisterVM
+<div class="row text-center">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h2>@ViewData["Title"]</h2>
+        <p>Molimo ispunite podatke za registraciju.</p>
+        <form asp-action="Register" asp-controller="Register" id="RegisterForm" ajax-result="RegisterForm" class="ajax-submit ajax-form">
+            <hr />
+            <span style="color:red">Napomena: Za razliku od Expertbooker, ovdje passwordi nisu hashirani</span>
+            <div class="row" style="padding-top:20px">
+                <div class="col-md-12">
+                    Username:
+                </div>
+                <div class="col-md-12">
+                    @Html.TextBoxFor(U => U.Username, htmlAttributes: new { @style = "width:50%", @placeholder="unesite username" })
+                </div>
+            </div>
+            <span asp-validation-for="Username" class="alert alert-form-error"></span>
+            <br /><br />
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    Password:
+                </div>
+                <div class="col-md-12">
+                    @Html.PasswordFor(U => U.Password, htmlAttributes: new { @style = "width:50%", @placeholder = "unesite password" })
+                </div>
+            </div>
+            <span asp-validation-for="Password" class="alert alert-form-error"></span>
+            <br /><br />
+
+            <div class="row">
+                <div class="col-md-12">
+                    Email:
+                </div>
+                <div class="col-md-12">
+                    @Html.TextBoxFor(U => U.Email, htmlAttributes: new { @style = "width:50%", @placeholder = "unesite email" })
+                </div>
+            </div>
+            <span asp-validation-for="Email" class="alert alert-form-error"></span>
+            <br /><br />
+            <input type="submit" class="btn btn-primary" value="Submit" style="width:50%" />
+            <hr />
+        </form>
+    </div>
+    <div class="col-md-4"></div>
+</div>

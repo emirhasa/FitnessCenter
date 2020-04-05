@@ -1,0 +1,44 @@
+﻿
+@using Seminarski_fitness_centar_IB130116.Models;
+@{
+    
+    ViewData["Title"] = "Uredi obavjestenje";
+}
+
+
+@model Seminarski_fitness_centar_IB130116.Models.Obavjestenje;
+
+<div class="container">
+    <h1>Uredi obavještenje: </h1>
+    <div class="jumbotron">
+        <form asp-action="Snimi" asp-controller="Obavjestenja" method="post">
+
+            <div class="row">
+                <div class="col-md-12">
+                    Naslov:
+                </div>
+                <div class="col-md-12">
+                    @Html.TextBoxFor(O => O.Naslov,  htmlAttributes: new { @style="width:50%"})
+                </div>
+                <span asp-validation-for="Naslov" class="alert alert-form-error"></span>
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-12">
+                    Tekst:
+                </div>
+                <div class="col-md-12">
+                    @Html.TextAreaFor(O => O.Tekst, 5, 70, null)
+                </div>
+                <span asp-validation-for="Tekst" class="alert alert-form-error"></span>
+            </div>
+            <br />
+            @Html.HiddenFor(O => O.ObavjestenjeId)
+            <input type="submit" class="btn btn-outline-success" value="Snimi" />
+
+        </form>
+    </div>
+    <br/>
+    
+</div>

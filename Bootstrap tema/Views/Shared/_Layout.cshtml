@@ -1,0 +1,111 @@
+﻿@using System.Net
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Rewrite.Internal.ApacheModRewrite
+@using Seminarski_fitness_centar_IB130116.Helper
+@using Seminarski_fitness_centar_IB130116.Models
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Ispit.Web</title>
+
+    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/site.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/lib/animate/animate.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="~/lib/ionicons/css/ionicons.css" />
+    <link rel="stylesheet" href="~/lib/lightbox/css/lightbox.css" />
+    <link rel="stylesheet" href="~/lib/ionicons/css/ionicons.css" />
+    <link rel="stylesheet" href="~/lib/owlcarousel/assets/owl.carousel.css" />
+    <link rel="stylesheet" href="~/lib/owlcarousel/assets/owl.theme.default.css" />
+
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="/js/site.js"></script>
+
+    <script src="/js/FitnessCentar.js"></script>
+    <script src="/lib/counterup/counterup.min.js"></script>
+    <script src="/lib/easing/easing.js"></script>
+    <script src="/lib/isotope/isotope.pkgd.js"></script>
+    <script src="~/lib/lightbox/js/lightbox.js"></script>
+    <script src="~/lib/mobile-nav/mobile-nav.js"></script>
+    <script src="~/lib/owlcarousel/owl.carousel.js"></script>
+    <script src="~/lib/waypoints/waypoints.min.js"></script>
+    <script src="~/lib/wow/wow.js"></script>
+</head>
+
+
+<body>
+    @{ User user = Context.GetLoggedUser(); }
+    @if (ViewData["ErrorMessage"] != null || TempData["ErrorMessage"] != null)
+    {
+        <div id="ErrorMessage" class="alert alert-danger">
+            @ViewData["ErrorMessage"]
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Index" asp-action="Index" class="navbar-brand">Seminarski_fitness_centar_IB130116</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (user != null)
+                    {
+                        <li><a> Dobrodošao,  @user.Username </a></li>
+                        <li><a asp-area="" asp-controller="Login" asp-action="Logout">Logout</a></li>
+                        if (user.Role > 0)
+                        {
+                            <li><a asp-controller="Obavjestenja" asp-action="Dodaj">Dodaj obavjestenje</a></li>
+                            <li>@Html.ActionLink("Pregledaj zaposlenike", "Zaposlenici", "DolasciOdlasci")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Moji dolasci/odlasci", "ZaposlenikDolasciDetalji", "DolasciOdlasci")</li>
+                            <li>@Html.ActionLink("Obavjestenja", "", "Obavjestenja")</li>
+                        }
+                    }
+                    else
+                    {
+                        <li><a asp-area="" asp-controller="Login" asp-action="Index">Login</a></li>
+                        <li><a asp-area="" asp-controller="Register" asp-action="Index">Register</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <partial name="_CookieConsentPartial" />
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; 2019 - Seminarski_fitness_centar_IB130116</p>
+        </footer>
+    </div>
+
+
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

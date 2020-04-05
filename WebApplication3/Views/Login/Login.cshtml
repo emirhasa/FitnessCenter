@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "Login - Fitness centar";
+    Layout = "_LayoutNoFooter";
+}
+@model Seminarski_fitness_centar_IB130116.ViewModels.LoginVM;
+<!-- Login form -->
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 text-center">
+            <h2>@ViewData["Title"]</h2>
+            <p>Dobrodošli u fitness centar, molimo logirajte se</p>
+            <form asp-controller="Login" asp-action="Index" id="LoginForm" method="post">
+                <hr />
+                @*@if (ViewData["ErrorMessage"] != null || TempData["ErrorMessage"] != null)
+        {
+            <div id="ErrorMessage" class="alert alert-danger">
+                @ViewData["ErrorMessage"]
+                @TempData["ErrorMessage"]
+            </div>
+        }*@
+
+
+                <div class="row" style="padding-top:20px;">
+                    
+                    <div class="col-md-12">
+                        Username:
+                    </div>
+                    <div class="col-md-12">
+                        @Html.TextBoxFor(U => U.Username, htmlAttributes: new { @style="width:50%", @placeholder = "unesite username" })
+                    </div>
+                </div>
+
+                <span asp-validation-for="Username" class="alert alert-form-error"></span>
+                <br /><br />
+
+                <div class="row">
+                    <div class="col-md-12">
+                        Lozinka:
+                    </div>
+                    <div class="col-md-12">
+                        @Html.PasswordFor(U => U.Password, htmlAttributes: new { @style = "width:50%", @placeholder = "unesite password" }) 
+                    </div>
+                </div>
+
+                <span asp-validation-for="Password" class="alert alert-form-error"></span>
+
+                <br /><br />
+
+                @Html.HiddenFor(U => U.IsLogging)
+                <input type="submit" class="btn btn-primary" style="width:50%" value="Submit" />
+                <hr />
+            </form>
+                
+
+            @Html.ActionLink(("Nemate korisnički račun? Registrirajte se!"), "", "Register")
+            <div><br /></div>
+            <div class="container container-no-padding">
+                <button type="button" class="btn btn-default" data-toggle="collapse" style="padding-left:0px; color:#6d6d6d; font-style:italic" data-target="#show_login_info" font-style="italic">Pogledaj login podatke</button>
+                <div id="show_login_info" class="collapse">
+                    <br />
+                    <div>
+                        <h4>Admini: </h4>
+                        <p>
+                            Username: master(već UKLJUČEN TWO-Factor, probati ostale korisnike) / Password: sarajevo <br />
+                            Username: admin2 / Password: mostarmostar
+                        </p>
+                        <h4>Zaposlenici: </h4>
+                        <p>
+                            Username: mujo_mujic / Password: mujomujic <br />
+                            Username: haso_hasic / Password: hasohasic
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+
+<script>
+    $ = jQuery;
+    $(document).ready(function () {
+        $('input[name="IsLogging"]').val(1);
+    })
+</script>

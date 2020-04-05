@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Login - Fitness centar";
+    Layout = "_LayoutNoFooter";
+}
+
+<!-- Login form -->
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 text-center">
+        <h2>@ViewData["Title"]</h2>
+        <p>Verifikacijski kod je poslat na mail</p>
+        <form asp-controller="Login" asp-action="TwoFactorVerify" id="LoginForm" method="post">
+            <hr />
+
+            <div class="row" style="padding-top:20px;">
+                <div class="col-md-12">
+                    Verifikacijski broj:
+                </div>
+                <div class="col-md-12">
+                    <input type="number" required name="verification_code" style="width:50%" />
+                </div>
+            </div>
+            <br /><br />
+
+            <input type="submit" class="btn btn-primary" style="width:50%" value="Submit" />
+            <hr />
+        </form>
+
+    </div>
+    <div class="col-md-4"></div>
+</div>
+<div class="row text-center">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        @Html.ActionLink("Pošalji novi kod?", "SendTwoFactorCode", "Login")
+    </div>
+    <div class="col-md-4"></div>
+</div>

@@ -1,0 +1,95 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
+for details on configuring this project to bundle and minify static web assets. */
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+
+/* Moj CSS
+*/
+
+
+.field-validation-error {
+    font-size:11px;
+    color: red;
+}
+
+.container-no-padding {
+    padding-left:0px;
+}
+
+.span-text-red {
+    color:red
+}
+
+.obavjestenje-naslov{
+    margin-bottom:10px;
+    font-size:20px;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #c3c3c3;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #bfbfbf;
+}
+
+.container {
+    padding-left:0px;
+}
+
+.table-hover > tbody > tr:hover {
+    background-color: #a6e2d9;
+}
+
+.alert-danger {
+    margin-top:60px
+}
+
+input::placeholder {
+    /* Firefox, Chrome, Opera */
+    text-align: center;
+}
+
+.obavjestenje-div {
+    box-shadow:0 5px 5px 0 rgba(29, 129, 199, 0.2), 0 6px 24px 0 rgba(0, 0, 0, 0.19);
+    padding:10px;
+}
+
+#header {
+    box-shadow: 0 3px 10px lightgray;
+}

@@ -1,0 +1,80 @@
+﻿@using System.Net
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Rewrite.Internal.ApacheModRewrite
+@using Seminarski_fitness_centar_IB130116.Models
+@using Seminarski_fitness_centar_IB130116.Helper
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Ispit.Web</title>
+
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/site.css" />
+
+
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="/js/site.js"></script>
+
+    <script src="/js/FitnessCentar.js"></script>
+
+</head>
+
+
+<body>
+    @{ User user = Context.GetLoggedUser(); }
+    @if (ViewData["ErrorMessage"] != null || TempData["ErrorMessage"] != null)
+    {
+        <div id="ErrorMessage" class="alert alert-danger">
+            @ViewData["ErrorMessage"]
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Index" asp-action="Index" class="navbar-brand">Seminarski_fitness_centar_IB130116</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (user != null)
+                    {
+                        <li><a> Dobrodošao,  @user.Username </a></li>
+                        <li><a asp-area="" asp-controller="Login" asp-action="Logout">Logout</a></li>
+                    }
+                    else
+                    {
+                        <li><a asp-area="" asp-controller="Login" asp-action="Index">Login</a></li>
+                        <li><a asp-area="" asp-controller="Register" asp-action="Index">Registracija</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <partial name="_CookieConsentPartial" />
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+
+
+    @RenderSection("Scripts", required: false)
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

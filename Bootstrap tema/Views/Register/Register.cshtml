@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Registracija - Fitness centar";
+}
+
+<!-- Registration form -->
+@model Seminarski_fitness_centar_IB130116.ViewModels.RegisterVM;
+<div class="col-md-4 col-md-offset-4">
+
+    <h2>@ViewData["Title"]</h2>
+
+    <form asp-action="Register" asp-controller="Register" id="RegisterForm" ajax-result="RegisterForm" class="ajax-submit ajax-form">
+        <hr/>
+        <div class="row form-group">
+            <div class="col-md-12">
+                Username:
+            </div>
+            <div class="col-md-12">
+                @Html.TextBoxFor(U => U.Username)
+            </div>
+            <span asp-validation-for="Username" class="alert alert-form-error"></span>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-md-12">
+                Password:
+            </div>
+            <div class="col-md-12">
+                @Html.PasswordFor(U => U.Password)
+            </div>
+            <span asp-validation-for="Password" class="alert alert-form-error"></span>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-md-12">
+                Email:
+            </div>
+            <div class="col-md-12">
+                @Html.TextBoxFor(U => U.Email)
+            </div>
+            <span asp-validation-for="Email" class="alert alert-form-error"></span>
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Submit"/>
+    </form>
+
+</div>
